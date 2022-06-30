@@ -5,7 +5,7 @@ const log = require('./log');
 const constants = require('./config/constants');
 
 const options = {
-  host: 'localhost',
+  host: config.httpAddress,
   port: config.httpPort,
   timeout: 2000,
   method: 'GET',
