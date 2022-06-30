@@ -73,10 +73,13 @@ jobSplitter.generateEncodingTask = function generateEncodingTask(job, encodingTr
   task.outputFolder = job.outputFolder;
   task.videoEncoder = encodingTrack.videoEncoder;
   task.videoSize = encodingTrack.videoSize;
+  task.videoFps = encodingTrack.videoFps;
   task.videoBitrate = encodingTrack.videoBitrate;
   task.audioEncoder = encodingTrack.audioEncoder;
   task.audioBitrate = encodingTrack.audioBitrate;
   task.audioFrequency = encodingTrack.audioFrequency;
+  task.audioChannels = encodingTrack.audioChannels;
+  task.screenshots = encodingTrack.screenshots;
   task.outputAsset = jobSplitter.generateOutputAssetName(job, encodingTrack);
   task.status = constants.WORKFLOW_STATUS.NEW;
   return task;
@@ -92,10 +95,12 @@ jobSplitter.generatePackagingTask = function generatePackagingTask(job, packagin
   task.outputFolder = job.outputFolder;
   task.videoEncoder = packagingTrack.videoEncoder;
   task.videoSize = packagingTrack.videoSize;
+  task.videoFps = encodingTrack.videoFps;
   task.videoBitrate = packagingTrack.videoBitrate;
   task.audioEncoder = packagingTrack.audioEncoder;
   task.audioBitrate = packagingTrack.audioBitrate;
   task.audioFrequency = packagingTrack.audioFrequency;
+  task.audioChannels = encodingTrack.audioChannels;
   task.outputAsset = `${job.name}`;
   task.status = constants.WORKFLOW_STATUS.NEW;
   return task;

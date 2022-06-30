@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python3 /home/matt/Documents/Bento4/Source/Python/utils/mp4-dash.py

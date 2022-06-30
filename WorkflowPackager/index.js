@@ -39,7 +39,7 @@ app.processPackagingTasks = function processEncodingTasks() {
         }
       });
     } else {
-      log.info('Workflow engine did not return any packager work....');
+      //log.info('Workflow engine did not return any packager work....');
       app.startProcessingOnTimeout();
     }
   });

@@ -17,78 +17,96 @@ authoringSpec.init = function init() {
         videoEncoder: 'libx265',
         videoSize: '768x432',
         videoBitrate: 300,
+        videoFps    : 25,
         audioEncoder: 'copy',
         audioBitrate: '320k',
         audioFrequency: '48000',
+        audioChannels : 2
       },
       {
         videoEncoder: 'libx265',
         videoSize: '960x540',
         videoBitrate: 900,
+        videoFps    : 25,
         audioEncoder: 'copy',
         audioBitrate: '320k',
         audioFrequency: '48000',
+        audioChannels : 2
       },
       {
         videoEncoder: 'libx265',
         videoSize: '1280x720',
         videoBitrate: 2400,
+        videoFps    : 25,
         audioEncoder: 'copy',
         audioBitrate: '320k',
         audioFrequency: '48000',
+        audioChannels : 2
       },
     ],
-    packagingTracks: [
+    /*packagingTracks: [
       {
         videoEncoder: 'libx265',
         videoSize: '1280x720',
         videoBitrate: 2400,
+        videoFps    : 25,
         audioEncoder: 'copy',
         audioBitrate: '320k',
         audioFrequency: '48000',
         packager: 'hls-fmp4',
+        audioChannels : 2
       },
-    ],
+    ],*/
   };
 
   authoringSpec.specs['sb-x264-medium'] = {
     encodingTracks: [
-      {
+      /*{
         videoEncoder: 'libx264',
         videoSize: '768x432',
         videoBitrate: 300,
+        videoFps    : 25,
         audioEncoder: 'aac',
         audioBitrate: '320k',
         audioFrequency: '48000',
-      },
+        audioChannels : 2
+      },*/
       {
         videoEncoder: 'libx264',
         videoSize: '960x540',
         videoBitrate: 900,
+        videoFps    : 25,
         audioEncoder: 'aac',
         audioBitrate: '320k',
         audioFrequency: '48000',
+        audioChannels : 2,
+        screenshots: true
       },
       {
         videoEncoder: 'libx264',
         videoSize: '1280x720',
         videoBitrate: 2400,
+        videoFps    : 25,
         audioEncoder: 'aac',
         audioBitrate: '320k',
         audioFrequency: '48000',
+        audioChannels : 2,
+        screenshots: false
       },
     ],
-    packagingTracks: [
+    /*packagingTracks: [
       {
         videoEncoder: 'libx264',
         videoSize: '1280x720',
         videoBitrate: 2400,
+        videoFps    : 25,
         audioEncoder: 'aac',
         audioBitrate: '320k',
         audioFrequency: '48000',
         packager: 'hls-fmp4',
+        audioChannels : 2
       },
-    ],
+    ],*/
   };
 
   authoringSpec.specs['sb-vp9-medium'] = {
@@ -97,25 +115,31 @@ authoringSpec.init = function init() {
         videoEncoder: 'libvpx-vp9',
         videoSize: '768x432',
         videoBitrate: 300,
+        videoFps    : 25,
         audioEncoder: 'libopus',
         audioBitrate: '320k',
         audioFrequency: '48000',
+        audioChannels : 2
       },
       {
         videoEncoder: 'libvpx-vp9',
         videoSize: '960x540',
         videoBitrate: 900,
+        videoFps    : 25,
         audioEncoder: 'libopus',
         audioBitrate: '320k',
         audioFrequency: '48000',
+        audioChannels : 2
       },
       {
         videoEncoder: 'libvpx-vp9',
         videoSize: '1280x720',
         videoBitrate: 2400,
+        videoFps    : 25,
         audioEncoder: 'libopus',
         audioBitrate: '320k',
         audioFrequency: '48000',
+        audioChannels : 2
       },
     ],
     packagingTracks: [
@@ -123,10 +147,12 @@ authoringSpec.init = function init() {
         videoEncoder: 'libvpx-vp9',
         videoSize: '1280x720',
         videoBitrate: 2400,
+        videoFps    : 25,
         audioEncoder: 'libopus',
         audioBitrate: '320k',
         audioFrequency: '48000',
         packager: 'mpd',
+        audioChannels : 2
       },
     ],
   };

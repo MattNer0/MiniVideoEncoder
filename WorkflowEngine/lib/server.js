@@ -5,6 +5,7 @@ const registerRoutes = require('fastify-register-routes');
 const path = require('path');
 const fastify = require('fastify')({
   logger: {
+    level: 'warn',
     prettyPrint: true,
   },
 });

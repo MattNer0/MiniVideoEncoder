@@ -1,0 +1,13 @@
+diff --git a/node_modules/fluent-bento4/src/commands/command.js b/node_modules/fluent-bento4/src/commands/command.js
+index 9fc1aa9..32f7f41 100644
+--- a/node_modules/fluent-bento4/src/commands/command.js
++++ b/node_modules/fluent-bento4/src/commands/command.js
+@@ -41,7 +41,7 @@ function Command(os, process, CmdType, { bin, win32ext = 'exe' } = {}) {
+    **/
+   instance.exec = function(input, args = []) {
+     if (Array.isArray(input)) {
+-      input.foreEach(i => args.push(i))
++      input.forEach(i => args.push(i))
+     } else {
+       args.push(input)
+     }

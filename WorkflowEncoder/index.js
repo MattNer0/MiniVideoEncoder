@@ -45,7 +45,7 @@ app.processEncodingTasks = function processEncodingTasks() {
       log.info(`An error occurred while searching for encoding tasks. Err: ${searchErr}`);
       app.startProcessingOnTimeout();
     } else {
-      log.info('Workflow engine did not return any encoding tasks.');
+      //log.info('Workflow engine did not return any encoding tasks.');
       app.startProcessingOnTimeout();
     }
   });
