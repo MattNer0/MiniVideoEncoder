@@ -105,7 +105,7 @@ module.exports = {
                 })
                 .screenshots({
                     count   : count ? count : 3,
-                    filename: filename ? filename : '%b-%02d.png',
+                    filename: filename ? filename : '%b-%0i.png',
                     size    : `${videoSize.width}x${videoSize.height}`,
                     folder  : outputFolder
                 })

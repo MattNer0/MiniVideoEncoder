@@ -81,8 +81,8 @@ async function encode() {
           height: parseInt(sizeSplit[1])
         }
 
-        await encoder.takeScreenshots(outputAsset, encodingInstructions.outputFolder, 6, '%b-%02d.png', finalSize)
-        await encoder.takeScreenshots(outputAsset, encodingInstructions.outputFolder, 6, '%b-%02d-thumb.png', {
+        await encoder.takeScreenshots(outputAsset, encodingInstructions.outputFolder, 6, '%b-%0i.png', finalSize)
+        await encoder.takeScreenshots(outputAsset, encodingInstructions.outputFolder, 6, '%b-%0i-thumb.png', {
           width : Math.floor(finalSize.width / 2),
           height: Math.floor(finalSize.height / 2)
         })
