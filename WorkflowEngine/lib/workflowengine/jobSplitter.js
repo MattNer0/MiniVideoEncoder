@@ -4,6 +4,8 @@
 
 // Dependencies
 const path = require('path');
+const ffprobe = require('ffprobe');
+const ffprobeStatic = require('ffprobe-static');
 
 const log = require('../log');
 const constants = require('../config/constants');
@@ -45,7 +47,7 @@ jobSplitter.split = async function split(job, cb) {
     if (spec.videoMaxDuration) {
       const videoPath = path.join(jobToUpdate.inputFolder, jobToUpdate.inputAsset);
       try {
-        const videoInfo = await ffprobe(videoPath, { path: '/usr/bin/ffprobe' });
+        const videoInfo = await ffprobe(videoPath, { 'path': ffprobeStatic.path });
         let videoDuration = 0
         let hasVideo = false
         if (videoInfo && Array.isArray(videoInfo.streams)) {
