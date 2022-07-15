@@ -81,8 +81,10 @@ async function encode() {
           height: parseInt(sizeSplit[1])
         }
 
-        await encoder.takeScreenshots(outputAsset, encodingInstructions.outputFolder, 6, '%b-%0i.png', finalSize)
-        await encoder.takeScreenshots(outputAsset, encodingInstructions.outputFolder, 6, '%b-%0i-thumb.png', {
+        const screenshotFilename = encodingInstructions.outputAsset.replace(`_${encodingInstructions.videoSize.replace('x', '_')}_${encodingInstructions.videoBitrate}.`, '.')
+
+        await encoder.takeScreenshots(outputAsset, encodingInstructions.outputFolder, 6, screenshotFilename + '-%0i.png', finalSize)
+        await encoder.takeScreenshots(outputAsset, encodingInstructions.outputFolder, 6, screenshotFilename + '-%0i-thumb.png', {
           width : Math.floor(finalSize.width / 2),
           height: Math.floor(finalSize.height / 2)
         })
