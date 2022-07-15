@@ -17,14 +17,13 @@ const jobSplitter = {};
 
 jobSplitter.generateOutputAssetName = function generateOutputAssetName(job, track) {
   const videoSize = track.videoSize.replace('x', '_');
-  const { videoBitrate } = track;
   const extensionDotPos = job.outputAsset.lastIndexOf('.');
   const newExtension = jobSplitter.getExtension(track.videoEncoder);
   if (extensionDotPos !== -1) {
     const extension = job.outputAsset.substr(extensionDotPos);
-    return job.outputAsset.replace(extension, `_${videoSize}_${videoBitrate}.${newExtension}`);
+    return job.outputAsset.replace(extension, `__${videoSize}.${newExtension}`);
   }
-  return `${job.outputAsset}_${videoSize}_${videoBitrate}.${newExtension}`;
+  return `${job.outputAsset}__${videoSize}.${newExtension}`;
 };
 
 jobSplitter.getExtension = function getExtension(videoEncoder) {
