@@ -3,6 +3,8 @@
  */
 
 // Dependencies
+const path = require('path');
+
 const log = require('../log');
 const constants = require('../config/constants');
 const database = require('../database/database');
@@ -35,11 +37,51 @@ jobSplitter.getExtension = function getExtension(videoEncoder) {
   }
 };
 
-jobSplitter.split = function split(job, cb) {
+jobSplitter.split = async function split(job, cb) {
   // Split the job into one or more tasks depending on the encodingType
   const jobToUpdate = job;
   const spec = authoringSpec.getAuthoringSpec(job.encodingType);
   if (spec) {
+    if (spec.videoMaxDuration) {
+      const videoPath = path.join(jobToUpdate.inputFolder, jobToUpdate.inputAsset);
+      try {
+        const videoInfo = await ffprobe(videoPath, { path: '/usr/bin/ffprobe' });
+        let videoDuration = 0
+        let hasVideo = false
+        if (videoInfo && Array.isArray(videoInfo.streams)) {
+          for (let i = 0; i < videoInfo.streams.length; i++) {
+            if (videoInfo.streams[i].codec_type === 'video') {
+              hasVideo = true
+            }
+
+            if (videoInfo.streams[i].codec_type === 'video' || videoInfo.streams[i].codec_type === 'audio') {
+
+              if (stream.duration) {
+                videoDuration = Math.max(videoDuration, parseFloat(stream.duration))
+              } else if (stream.tags && stream.tags.DURATION) {
+                videoDuration = Math.max(videoDuration, parseFloat(stream.tags.DURATION))
+              }
+            }
+          }
+        }
+
+        if (!hasVideo) {
+          throw new Error('No Video Stream')
+        }
+
+        if (videoDuration === 0 || videoDuration > spec.videoMaxDuration) {
+          throw new Error('Video Duration')
+        }
+      } catch (e) {
+        log.error(e.message);
+        jobToUpdate.status = constants.WORKFLOW_STATUS.ERROR;
+        jobToUpdate.statusMessage = e.message;
+        await database.updateJob(jobToUpdate);
+        cb({ message: e.message });
+        return;
+      }
+    }
+
     if (spec.encodingTracks && Array.isArray(spec.encodingTracks) && spec.encodingTracks.length > 0) {
       spec.encodingTracks.forEach(async (encodingTrack) => {
         const task = jobSplitter.generateEncodingTask(jobToUpdate, encodingTrack);
@@ -58,7 +100,7 @@ jobSplitter.split = function split(job, cb) {
     log.error(message);
     jobToUpdate.status = constants.WORKFLOW_STATUS.ERROR;
     jobToUpdate.statusMessage = message;
-    database.updateJob(jobToUpdate);
+    await database.updateJob(jobToUpdate);
     cb({ message });
   }
 };

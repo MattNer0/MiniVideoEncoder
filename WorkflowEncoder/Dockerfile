@@ -1,6 +1,10 @@
+FROM alfg/bento4:latest
+
 FROM node:12-alpine 
 
 EXPOSE 8182
+
+RUN apk add --no-cache ffmpeg
 
 # Create the work dir and set permissions as WORKDIR set the permissions as root
 RUN mkdir /home/node/app/ && chown -R node:node /home/node/app
@@ -17,5 +21,9 @@ RUN npm install --only=prod && npm cache clean --force --loglevel=error
 # Copy app source
 COPY --chown=node:node index.js .
 COPY --chown=node:node lib ./lib/
+
+COPY --from=0 /opt/bento4/bin ./bento4-bin/
+
+ENV PATH="/home/node/app/bento4-bin:${PATH}"
 
 CMD [ "node", "index.js"]

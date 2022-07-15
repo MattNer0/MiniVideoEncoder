@@ -60,7 +60,8 @@ authoringSpec.init = function init() {
   };
 
   authoringSpec.specs['sb-x264-medium'] = {
-    encodingTracks: [
+    videoMaxDuration: 31.0,
+    encodingTracks  : [
       /*{
         videoEncoder: 'libx264',
         videoSize: '768x432',
