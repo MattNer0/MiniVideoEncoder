@@ -72,10 +72,21 @@ async function encode() {
 
     }
 
-    if (encodingInstructions.screenshots) {
+    if (encodingInstructions.screenshots && videoSize) {
       try {
         log.info(`I will take video thumbnails...`);
-        await encoder.takeScreenshots(outputAsset, encodingInstructions.outputFolder)
+        const sizeSplit = videoSize.split('x')
+        const finalSize = {
+          width : parseInt(sizeSplit[0]),
+          height: parseInt(sizeSplit[1])
+        }
+
+        await encoder.takeScreenshots(outputAsset, encodingInstructions.outputFolder, 6, '%b-%02d.png', finalSize)
+        await encoder.takeScreenshots(outputAsset, encodingInstructions.outputFolder, 6, '%b-%02d-thumb.png', {
+          width : Math.floor(finalSize.width / 2),
+          height: Math.floor(finalSize.height / 2)
+        })
+
       } catch({ err, stdout, stderr }) {
         log.error(`Screenshots error: ${err.message}`);
         log.error(`ffmpeg output: ${stdout}`);

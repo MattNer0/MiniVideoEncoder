@@ -13,6 +13,6 @@ services:
     ports:
       - '27017:27017'
     networks: 
-      - mve-network
+      - video-encoding
 networks:
-    mve-network:
+  video-encoding:

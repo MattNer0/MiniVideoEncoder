@@ -92,7 +92,7 @@ module.exports = {
                 .save(outputAsset);
         });
     },
-    takeScreenshots(inputAsset, outputFolder) {
+    takeScreenshots(inputAsset, outputFolder, count, filename, videoSize) {
         return new Promise(function(resolve, reject) {
             ffmpeg()
                 .input(inputAsset)
@@ -104,9 +104,10 @@ module.exports = {
                     reject({ err, stdout, stderr })
                 })
                 .screenshots({
-                    count: 6,
-                    filename: '%b-%02d.png',
-                    folder: outputFolder
+                    count   : count ? count : 3,
+                    filename: filename ? filename : '%b-%02d.png',
+                    size    : `${videoSize.width}x${videoSize.height}`,
+                    folder  : outputFolder
                 })
         });
     }
