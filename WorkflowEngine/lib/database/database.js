@@ -95,12 +95,25 @@ database.updateJob = async function updateJob(job) {
   }
 };
 
+database.mapJobError = async function updateJob(jobId, statusMessage) {
+  try {
+    const update = await Job.findByIdAndUpdate(jobId, {
+      status       : constants.WORKFLOW_STATUS.ERROR,
+      statusMessage: statusMessage
+    });
+    return update;
+  } catch (err) {
+    log.error(`An error occurred while trying to update job ${jobId}. Err: ${err}`);
+    return null;
+  }
+};
+
 database.updateJobStatus = async function updateJob(jobId, status) {
   try {
     const update = await Job.findByIdAndUpdate(jobId, { status });
     return update;
   } catch (err) {
-    log.error(`An error occurred while trying to update jobs ${jobId}. Err: ${err}`);
+    log.error(`An error occurred while trying to update job ${jobId}. Err: ${err}`);
     return null;
   }
 };
